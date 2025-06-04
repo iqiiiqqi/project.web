@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post a Job | Job Board</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      line-height: 1.6;
+      color: #333;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 192, 203, 0.05), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(135, 206, 250, 0.05), transparent 40%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    header, main, footer {
+      padding: 1rem 1.5rem;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    header {
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: 0 0 12px 12px;
+    }
+
+    header img.logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    header img.logo:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 0;
+      color: #007BFF;
+    }
+
+    main {
+      background: #fff;
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-family: inherit;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #007BFF;
+      box-shadow: 0 0 5px #007BFF33;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .error-message {
+      color: #d93025;
+      font-size: 0.875rem;
+      display: none;
+      margin-top: 0.25rem;
+    }
+
+    button[type="submit"] {
+      align-self: flex-start;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 0.75rem 1.5rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #007BFF;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="browse.html">Browse Jobs</a></li>
+    <li><a href="post a job.html">Post a Job</a></li>
+  </ul>
+</nav>
+
+<header role="banner">
+  <img src="images/logo.png" alt="Job Board Logo" class="logo" />
+  <h1>Post a Job</h1>
+</header>
+
+<main role="main">
+  <section aria-labelledby="post-job-title">
+    <h2 id="post-job-title" class="sr-only">Job Posting Form</h2>
+
+    <form id="postJobForm" novalidate aria-describedby="formInstructions">
+      <p id="formInstructions" style="margin-bottom: 1rem; color: #555;">
+        Please fill out the form below to post a new job. All fields marked with * are required.
+      </p>
+
+      <div class="form-row">
+        <div>
+          <label for="jobTitle">Job Title *</label>
+          <input type="text" id="jobTitle" name="jobTitle" required aria-required="true" minlength="3" />
+          <p class="error-message" id="errorJobTitle">Please enter a valid job title (3+ characters).</p>
+        </div>
+
+        <div>
+          <label for="companyName">Company Name *</label>
+          <input type="text" id="companyName" name="companyName" required aria-required="true" minlength="2" />
+          <p class="error-message" id="errorCompanyName">Please enter the company name.</p>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="location">Location *</label>
+          <input type="text" id="location" name="location" required aria-required="true" />
+          <p class="error-message" id="errorLocation">Please specify the job location.</p>
+        </div>
+
+        <div>
+          <label for="jobType">Job Type *</label>
+          <select id="jobType" name="jobType" required aria-required="true">
+            <option value="" disabled selected>Select job type</option>
+            <option value="full-time">Full-time</option>
+            <option value="part-time">Part-time</option>
+            <option value="contract">Contract</option>
+            <option value="internship">Internship</option>
+            <option value="temporary">Temporary</option>
+          </select>
+          <p class="error-message" id="errorJobType">Please select a job type.</p>
+        </div>
+      </div>
+
+      <div>
+        <label for="salary">Salary (optional)</label>
+        <input type="number" id="salary" name="salary" min="0" step="1000" placeholder="e.g., 50000" />
+      </div>
+
+      <div>
+        <label for="applicationUrl">Application URL *</label>
+        <input type="url" id="applicationUrl" name="applicationUrl" required aria-required="true" placeholder="https://example.com/apply" />
+        <p class="error-message" id="errorApplicationUrl">Please enter a valid URL.</p>
+      </div>
+
+      <div>
+        <label for="description">Job Description *</label>
+        <textarea id="description" name="description" required aria-required="true" minlength="20" placeholder="Describe the role, responsibilities, and requirements..."></textarea>
+        <p class="error-message" id="errorDescription">Please enter a description (at least 20 characters).</p>
+      </div>
+
+      <button type="submit">Submit Job</button>
+    </form>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  &copy; 2025 Job Board. All rights reserved.
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('postJobForm');
+    const validators = {
+      jobTitle: value => value.trim().length >= 3,
+      companyName: value => value.trim().length >= 2,
+      location: value => value.trim().length > 0,
+      jobType: value => ['full-time', 'part-time', 'contract', 'internship', 'temporary'].includes(value),
+      applicationUrl: value => {
+        try { new URL(value); return true; } catch { return false; }
+      },
+      description: value => value.trim().length >= 20
+    };
+
+    function showError(field, show) {
+      const error = document.getElementById(`error${field.charAt(0).toUpperCase() + field.slice(1)}`);
+      if (error) error.style.display = show ? 'block' : 'none';
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let valid = true;
+      for (const [field, validate] of Object.entries(validators)) {
+        const input = form[field];
+        const isValid = validate(input.value);
+        showError(field, !isValid);
+        if (!isValid) valid = false;
+      }
+      if (valid) {
+        alert('Job posted successfully! (Simulation)');
+        form.reset();
+      }
+    });
+
+    Object.keys(validators).forEach(field => {
+      const input = form[field];
+      if (!input) return;
+      input.addEventListener('input', () => {
+        const isValid = validators[field](input.value);
+        showError(field, !isValid);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
